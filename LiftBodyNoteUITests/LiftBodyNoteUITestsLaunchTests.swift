@@ -1,9 +1,3 @@
-//
-//  LiftBodyNoteUITestsLaunchTests.swift
-//  LiftBodyNoteUITests
-//
-//  Created by David Puksanskis on 12/11/2025.
-//
 
 import XCTest
 

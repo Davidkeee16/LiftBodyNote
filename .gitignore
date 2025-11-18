@@ -1,0 +1,37 @@
+# Xcode
+*.xcworkspace/
+*.xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcuserstate
+
+# Swift Package Manager
+/.build/
+/Package.resolved
+/Packages/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/
+
+# Derived Data and build
+DerivedData/
+build/
+
+# General macOS
+.DS_Store
+
+# Archives
+*.xcarchive
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# Env and secrets
+*.env
+*.xcconfig
+Secrets.plist

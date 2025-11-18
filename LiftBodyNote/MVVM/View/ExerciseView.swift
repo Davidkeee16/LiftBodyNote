@@ -1,16 +1,10 @@
-//
-//  ContentView.swift
-//  LiftBodyNote
-//
-//  Created by David Puksanskis on 12/11/2025.
-//
 
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct ExerciseView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var items: [Exercise]
 
     var body: some View {
         NavigationSplitView {
@@ -19,7 +13,7 @@ struct ContentView: View {
                     NavigationLink {
                         Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(item.muscleGroup, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -41,7 +35,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
+            let newItem = Exercise(timestamp: Date())
             modelContext.insert(newItem)
         }
     }
@@ -56,6 +50,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    ExerciseView()
+        .modelContainer(for: Exercise.self, inMemory: true)
 }
