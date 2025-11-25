@@ -7,7 +7,7 @@ struct LiftBodyNoteApp: App {
    
     var body: some Scene {
         WindowGroup {
-            ExerciseView()
+            HomeView()
         }
         // MARK: - Storage: SwiftData models for this app
         .modelContainer(for: [Exercise.self])
