@@ -36,12 +36,11 @@ final class CatalogViewModel: ObservableObject {
         let grouped = Dictionary(grouping: allExercises) { exercise in
             exercise.muscleGroup
         }
-        let mappedSections: [CatalogSection] = grouped.map { (groupName, exercisesInGroup) in
+        let mapped: [CatalogSection] = grouped.map { (groupName, exercisesInGroup) in
             CatalogSection(muscleGroup: groupName, exercises: exercisesInGroup)
         }
-        let sorted = mappedSections.sorted { lhs, rhs in
-            lhs.muscleGroup < rhs.muscleGroup
-        }
+        let sorted = mapped.sorted { $0.muscleGroup < $1.muscleGroup }
+        
         
         self.sections = sorted
     }

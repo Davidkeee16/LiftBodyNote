@@ -39,10 +39,7 @@ final class HomeViewModel: ObservableObject {
         addMode = .custom
         isAddOptionsPresented = false
     }
-    func selectSystem() {
-        addMode = .system
-        isAddOptionsPresented = false
-    }
+    
     func addCustomExercise(
         name: String,
         muscleGroup: String,
@@ -54,6 +51,7 @@ final class HomeViewModel: ObservableObject {
                                              notes: notes
             )
             errorMessage = nil
+            isAddOptionsPresented = false
         } catch {
             errorMessage = "Failed to save custom exercise"
         }
@@ -64,6 +62,14 @@ final class HomeViewModel: ObservableObject {
             errorMessage = nil
         } catch {
             errorMessage = "Failed to save system exercise"
+        }
+    }
+    func deleteExercise(_ exercise: Exercise) {
+        do {
+            try repository.deleteExercise(exercise)
+            errorMessage = nil
+        } catch {
+            errorMessage = "Failed to delete exercise"
         }
     }
 }

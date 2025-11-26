@@ -9,7 +9,7 @@ import Foundation
 
 extension Exercise {
     
-    static func exercisesInApp() -> [Exercise] {
+    static func systemCatalog() -> [Exercise] {
         return [
             Exercise(name: "Burpees", muscleGroup: "Full Body", isUserCreated: false),
             Exercise(name: "Bodyweight Squats", muscleGroup: "Legs", isUserCreated: false),

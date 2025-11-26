@@ -14,4 +14,6 @@ protocol ExerciseRepository {
     ) throws
     
     func addSystemExercise(from preset: Exercise) throws
+    
+    func deleteExercise(_ exercise: Exercise) throws
 }

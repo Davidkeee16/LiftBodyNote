@@ -37,5 +37,10 @@ final class SwiftDataExerciseRepository: ExerciseRepository {
         context.insert(exercise)
         try context.save()
     }
+    
+    func deleteExercise(_ exercise: Exercise) throws {
+        context.delete(exercise)
+        try context.save()
+    }
 
 }
