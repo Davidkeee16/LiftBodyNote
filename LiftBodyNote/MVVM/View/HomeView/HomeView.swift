@@ -12,6 +12,26 @@ struct HomeView: View {
     // MARK: - ViewModel
     @StateObject private var viewModel = HomeViewModel()
     
+    // MARK: - Grouped Data
+    
+    private var groupedExercises: [(group: String, items: [Exercise])] {
+        let dictionary = Dictionary(grouping: exercises) { exercise in
+            exercise.muscleGroup
+        }
+        let mapped: [(group: String, items: [Exercise])] = dictionary.map { (key, value) in
+            let sortedItems = value.sorted { lhs, rhs in
+                lhs.name < rhs.name
+            }
+            return (group: key, items: sortedItems)
+        }
+        let sorted = mapped.sorted { lhs, rhs in
+            lhs.group < rhs.group
+        }
+        return sorted
+    }
+    
+    // MARK: - Body
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -55,36 +75,30 @@ struct HomeView: View {
     }
     private var exerciseListView: some View {
         List {
-            ForEach(exercises) { exercise in
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(exercise.name)
-                            .font(.headline)
-                        Text(exercise.muscleGroup)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+            ForEach(groupedExercises, id: \.group) { section in
+                Section(header: Text(section.group)) {
+                    ForEach(section.items) { exercise in
+                        HStack {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(exercise.name)
+                                    .font(.headline)
+                            }
+                            Spacer()
+                        }
                     }
-                    Spacer()
-                    
-                    if exercise.isUserCreated {
-                        Text("Custom")
-                            .font(.caption)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(.blue.opacity(0.1))
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .onDelete { offset in
+                        handleDelete(in: section, offsets: offset)
                     }
                 }
             }
-            .onDelete(perform: handleDelete)
         }
     }
     
     // MARK: - Delete
     
-    private func handleDelete(at offsets: IndexSet) {
+    private func handleDelete(in section: (group: String, items:[Exercise]), offsets: IndexSet) {
         for index in offsets {
-            let exercise = exercises[index]
+            let exercise = section.items[index]
             viewModel.deleteExercise(exercise)
         }
     }
