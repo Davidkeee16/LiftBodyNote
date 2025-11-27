@@ -7,7 +7,8 @@ final class CatalogViewModel: ObservableObject {
     
     // MARK: Published State
     
-    @Published private(set) var sections: [CatalogSection] = []
+    
+    @Published private(set) var groups: [MuscleGroupItem] = []
     
     // MARK: - Update View
     
@@ -23,7 +24,7 @@ final class CatalogViewModel: ObservableObject {
             let key = Self.key(for: exercise)
             return !usedKeys.contains(key)
         }
-        buildSections(from: availableSystemExercises)
+        buildGroups(from: availableSystemExercises)
     }
     
     
@@ -32,17 +33,17 @@ final class CatalogViewModel: ObservableObject {
         exercise.name.lowercased() + "|" + exercise.muscleGroup.lowercased()
     }
     
-    private func buildSections(from allExercises: [Exercise]) {
+    private func buildGroups(from allExercises: [Exercise]) {
         let grouped = Dictionary(grouping: allExercises) { exercise in
             exercise.muscleGroup
         }
-        let mapped: [CatalogSection] = grouped.map { (groupName, exercisesInGroup) in
-            CatalogSection(muscleGroup: groupName, exercises: exercisesInGroup)
+        let mapped: [MuscleGroupItem] = grouped.map { (groupName, exercisesInGroup) in
+            MuscleGroupItem(name: groupName, exerciseCount: exercisesInGroup.count)
         }
-        let sorted = mapped.sorted { $0.muscleGroup < $1.muscleGroup }
+        let sorted = mapped.sorted { $0.name < $1.name}
         
         
-        self.sections = sorted
+        self.groups = sorted
     }
     
  

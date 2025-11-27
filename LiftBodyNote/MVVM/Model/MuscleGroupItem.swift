@@ -7,10 +7,10 @@
 
 import Foundation
 
-// MARK: - CatalogSection
+// MARK: - MuscleGroupItem
 
-struct CatalogSection: Identifiable {
+struct MuscleGroupItem: Identifiable {
     let id = UUID()
-    let muscleGroup: String
-    let exercises: [Exercise]
+    let name: String
+    let exerciseCount: Int
 }
