@@ -18,7 +18,7 @@ struct AddCustomExerciseView: View {
     @State private var notes: String = ""
     
     let onSave: (String, String, String?) -> Void
-
+    
     
     var body: some View {
         NavigationStack {
@@ -32,19 +32,20 @@ struct AddCustomExerciseView: View {
                 Section("Notes") {
                     TextField("Optional notes", text: $notes)
                 }
-                .navigationTitle("New exercise")
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss()
-                        }                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            onSave(name, muscleGroup, notes.isEmpty ? nil : notes)
-                            dismiss()
-                        }
-                        .disabled(name.isEmpty || muscleGroup.isEmpty)
+            }
+            
+            .navigationTitle("New exercise")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }                    }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        onSave(name, muscleGroup, notes.isEmpty ? nil : notes)
+                        dismiss()
                     }
+                    .disabled(name.isEmpty || muscleGroup.isEmpty)
                 }
             }
         }
