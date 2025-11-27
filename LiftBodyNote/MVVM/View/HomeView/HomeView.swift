@@ -23,13 +23,6 @@ struct HomeView: View {
             }
             .navigationTitle("My Exercises")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink {
-                        CatalogView()
-                    } label: {
-                        Image(systemName: "list.bullet.rectangle")
-                    }
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.didTapAddButton()
@@ -52,7 +45,7 @@ struct HomeView: View {
     
     private var emptyStateView: some View {
         VStack(spacing: 16) {
-            Image(systemName: "dumbell")
+            Image(systemName: "Dumbell")
                 .font(.system(size: 48))
             Text("No exercise yet")
                 .font(.headline)
